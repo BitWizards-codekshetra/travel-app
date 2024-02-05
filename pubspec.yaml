@@ -52,7 +52,15 @@ dependencies:
   flutter_carousel_widget: ^2.2.0
   location: ^5.0.3
   flutter_polyline_points: ^2.0.0
-  
+  flutter_launcher_icons: ^0.13.1
+
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
+
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to

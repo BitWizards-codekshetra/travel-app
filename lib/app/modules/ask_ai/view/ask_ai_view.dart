@@ -9,7 +9,6 @@ import 'package:hackathon_proj/app/modules/home/providers/home_providers.dart';
 import 'package:hackathon_proj/app/modules/home/view/home_view.dart';
 
 class AskAiView extends ConsumerWidget {
-  /// TODO add your comment here
   AskAiView({Key? key}) : super(key: key);
 
   static const routeName = '/askAi';
@@ -47,9 +46,8 @@ class AskAiView extends ConsumerWidget {
               color: Colors.black,
             ),
           ),
-          title: Text(
-            "GetSetGo",
-            style: GoogleFonts.jetBrainsMono(color: Color(0xFF2f2f2f)),
+          title: Image.asset(
+            BaseAssets.logo,
           ),
           actions: [
             ImageIcon(
@@ -111,7 +109,7 @@ class AskAiView extends ConsumerWidget {
               ),
               InkWell(
                 onTap: () {
-                  context.go(HomeView.routeName);
+                  context.push(HomeView.routeName);
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.06,

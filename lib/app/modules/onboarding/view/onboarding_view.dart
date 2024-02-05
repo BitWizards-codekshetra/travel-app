@@ -31,9 +31,8 @@ class OnboardingView extends ConsumerWidget {
             Icons.menu,
             color: Colors.black,
           ),
-          title: Text(
-            "GetSetGo",
-            style: GoogleFonts.jetBrainsMono(color: Color(0xFF2f2f2f)),
+          title: Image.asset(
+            BaseAssets.logo,
           ),
           actions: [
             ImageIcon(
@@ -95,7 +94,7 @@ class OnboardingView extends ConsumerWidget {
                   slideIndicator: CircularSlideIndicator(),
                 ),
                 items: [
-                  'https://st.depositphotos.com/1158226/1264/i/450/depositphotos_12646625-stock-photo-summer-in-in-the-scotland.jpg',
+                  'https://magikindia.com/wp-content/uploads/2015/12/cherai-beach-kochi.jpg',
                   'https://static.toiimg.com/photo/msid-94299540,width-96,height-65.cms',
                   'https://theplanetd.com/images/hill-stations-near-Delhi-Sangla-1.jpg',
                   'https://www.aanavandi.com/blog/wp-content/uploads/2019/08/ksrtc-munnar-Riyas-Paloli%E2%80%8E.jpg',
