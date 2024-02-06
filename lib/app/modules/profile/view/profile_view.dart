@@ -1,8 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hackathon_proj/app/core/theme/app_theme.dart';
-import 'package:hackathon_proj/app/modules/edit_profile/view/edit_profile_view.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hackathon_proj/app/core/theme/base_assets.dart';
 
 class ProfileView extends ConsumerWidget {
   /// TODO add your comment here
@@ -12,241 +12,168 @@ class ProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appTheme = ref.watch(appThemeProvider);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Menu"),
-          centerTitle: true,
-          toolbarHeight: MediaQuery.of(context).size.height * 0.1,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
+          title: Image.asset(
+            BaseAssets.logo,
+            width: MediaQuery.of(context).size.width * 0.5,
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(4.0),
+            child: Container(
+              color: Colors.black,
+              height: 1.0,
             ),
           ),
         ),
-        backgroundColor: appTheme.lightTheme.primaryColor,
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.01,
-                horizontal: MediaQuery.of(context).size.width * 0.05),
+              vertical: MediaQuery.of(context).size.height * 0.01,
+              horizontal: MediaQuery.of(context).size.width * 0.05,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  backgroundColor: appTheme.darkTheme.primaryColor,
-                  radius: MediaQuery.of(context).size.width * 0.12,
-                  child: Image.network(
-                      'https://imgs.search.brave.com/B1ZhL7CyFQbqRRXYtHKMXvtu0B9RRJWFhkT7Ugdm7tE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvMTE0NzIvMTE0/NzI3ODMucG5n'),
-                ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.height * 0.03,
                 ),
-                Text(
-                  "User Name",
-                  style: TextStyle(
-                      color: Color(0xFF2f2f2f),
-                      fontSize: 23,
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
-                ),
-                InkWell(
-                  onTap: () {
-                    context.push(EditProfileView.routeName);
-                  },
+                Center(
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.05),
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    width: MediaQuery.of(context).size.width * 1,
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    width: MediaQuery.of(context).size.height * 0.15,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(color: Colors.blueGrey, blurRadius: 3)
-                        ],
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
-                    child: Center(
-                        child: Row(
-                      children: [
-                        Text(
-                          "Edit Profile",
-                          style: TextStyle(
-                              color: Color(0xFF2f2f2f),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16),
-                        ),
-                        Spacer(),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.black,
-                        )
-                      ],
-                    )),
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage(BaseAssets.user))),
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.height * 0.03,
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.05),
-                  height: MediaQuery.of(context).size.height * 0.07,
-                  width: MediaQuery.of(context).size.width * 1,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.blueGrey, blurRadius: 3)
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
-                  child: Center(
-                      child: Row(
-                    children: [
-                      Text(
-                        "Booking History",
-                        style: TextStyle(
-                            color: Color(0xFF2f2f2f),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16),
+                Text(
+                  "Logout",
+                  style: GoogleFonts.jetBrainsMono(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Edit Profile",
+                      style: GoogleFonts.jetBrainsMono(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.black,
-                      )
-                    ],
-                  )),
+                    ),
+                    Spacer(),
+                    CupertinoSwitch(value: true, onChanged: (onChanged) {}),
+                  ],
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.height * 0.03,
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.05),
-                  height: MediaQuery.of(context).size.height * 0.07,
+                    vertical: MediaQuery.of(context).size.height * 0.01,
+                    horizontal: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.06,
                   width: MediaQuery.of(context).size.width * 1,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.blueGrey, blurRadius: 3)
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      color: Color(0xFFFCBF49)),
                   child: Center(
-                      child: Row(
-                    children: [
-                      Text(
-                        "Privacy Policiy",
-                        style: TextStyle(
-                            color: Color(0xFF2f2f2f),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.black,
-                      )
-                    ],
-                  )),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Full Name",
+                          style: GoogleFonts.jetBrainsMono(
+                              color: Color(0xFF2f2f2f)),
+                        ),
+                        Spacer(),
+                        Icon(Icons.edit, color: Color(0xFF2f2f2f))
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.height * 0.03,
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.05),
-                  height: MediaQuery.of(context).size.height * 0.07,
+                    vertical: MediaQuery.of(context).size.height * 0.01,
+                    horizontal: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.06,
                   width: MediaQuery.of(context).size.width * 1,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.blueGrey, blurRadius: 3)
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      color: Color(0xFFFCBF49)),
                   child: Center(
-                      child: Row(
-                    children: [
-                      Text(
-                        "Terms of uses",
-                        style: TextStyle(
-                            color: Color(0xFF2f2f2f),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.black,
-                      )
-                    ],
-                  )),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Address",
+                          style: GoogleFonts.jetBrainsMono(
+                              color: Color(0xFF2f2f2f)),
+                        ),
+                        Spacer(),
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.height * 0.03,
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.05),
-                  height: MediaQuery.of(context).size.height * 0.07,
+                    vertical: MediaQuery.of(context).size.height * 0.01,
+                    horizontal: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.06,
                   width: MediaQuery.of(context).size.width * 1,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.blueGrey, blurRadius: 3)
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      color: Color(0xFFFCBF49)),
                   child: Center(
-                      child: Row(
-                    children: [
-                      Text(
-                        "Logout",
-                        style: TextStyle(
-                            color: Color(0xFF2f2f2f),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.black,
-                      )
-                    ],
-                  )),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Nationality",
+                          style: GoogleFonts.jetBrainsMono(
+                              color: Color(0xFF2f2f2f)),
+                        ),
+                        Spacer(),
+                        Icon(Icons.edit, color: Color(0xFF2f2f2f))
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.height * 0.05,
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.05),
-                  height: MediaQuery.of(context).size.height * 0.07,
+                    vertical: MediaQuery.of(context).size.height * 0.01,
+                    horizontal: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.06,
                   width: MediaQuery.of(context).size.width * 1,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.blueGrey, blurRadius: 3)
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      color: Color(0xFF2f2f2f)),
                   child: Center(
-                      child: Row(
-                    children: [
-                      Text(
-                        "Delete Account",
-                        style: TextStyle(
-                            color: Color(0xFF2f2f2f),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.black,
-                      )
-                    ],
-                  )),
+                    child: Text(
+                      "Edit",
+                      style: GoogleFonts.jetBrainsMono(color: Colors.white),
+                    ),
+                  ),
                 ),
               ],
             ),

@@ -27,23 +27,10 @@ class OnboardingView extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: Icon(
-            Icons.menu,
-            color: Colors.black,
-          ),
           title: Image.asset(
             BaseAssets.logo,
+            width: MediaQuery.of(context).size.width * 0.5,
           ),
-          actions: [
-            ImageIcon(
-              AssetImage(BaseAssets.profile),
-              color: Colors.black,
-              size: 32,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.04,
-            )
-          ],
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white,

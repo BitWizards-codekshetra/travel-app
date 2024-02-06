@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'edit_profile_repository_impl.dart';
+part of 'booking_history_repository_impl.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$editProfileRepositoryHash() =>
-    r'c1284c826a634ec92514d7356e5b709a66109394';
+String _$bookingHistoryRepositoryHash() =>
+    r'1037a74428a1fba9c16dfaf061d7634fa8eb51cb';
 
-/// See also [editProfileRepository].
-@ProviderFor(editProfileRepository)
-final editProfileRepositoryProvider =
-    AutoDisposeProvider<EditProfileRepository>.internal(
-  editProfileRepository,
-  name: r'editProfileRepositoryProvider',
+/// See also [bookingHistoryRepository].
+@ProviderFor(bookingHistoryRepository)
+final bookingHistoryRepositoryProvider =
+    AutoDisposeProvider<BookingHistoryRepository>.internal(
+  bookingHistoryRepository,
+  name: r'bookingHistoryRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$editProfileRepositoryHash,
+      : _$bookingHistoryRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef EditProfileRepositoryRef
-    = AutoDisposeProviderRef<EditProfileRepository>;
+typedef BookingHistoryRepositoryRef
+    = AutoDisposeProviderRef<BookingHistoryRepository>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

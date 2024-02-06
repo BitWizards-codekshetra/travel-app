@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hackathon_proj/app/modules/ask_ai/model/aski_ai_response/place.dart';
 import 'package:hackathon_proj/app/modules/ask_ai/view/ask_ai_view.dart';
 import 'package:hackathon_proj/app/modules/auth/login/view/login_view.dart';
 import 'package:hackathon_proj/app/modules/auth/register/view/register_view.dart';
 import 'package:hackathon_proj/app/modules/book_hotel/view/book_hotel_view.dart';
 import 'package:hackathon_proj/app/modules/book_hotel/view/hotel_details.dart';
-import 'package:hackathon_proj/app/modules/edit_profile/view/edit_profile_view.dart';
+import 'package:hackathon_proj/app/modules/booking_history/view/booking_history_view.dart';
+import 'package:hackathon_proj/app/modules/bottom_bar/view/bottom_bar_view.dart';
 import 'package:hackathon_proj/app/modules/home/view/home_view.dart';
 import 'package:hackathon_proj/app/modules/onboarding/view/onboarding_view.dart';
 import 'package:hackathon_proj/app/modules/profile/view/profile_view.dart';
@@ -52,24 +54,35 @@ final routerProvider = Provider<GoRouter>(
         ),
 
         GoRoute(
-          path: EditProfileView.routeName,
-          builder: (context, state) => EditProfileView(),
+          path: BookingHistoryView.routeName,
+          builder: (context, state) => BookingHistoryView(),
         ),
 
         GoRoute(
           path: LoginView.routeName,
           builder: (context, state) => LoginView(),
         ),
-
+        GoRoute(
+          path: BottomBarView.routeName,
+          builder: (context, state) => BottomBarView(),
+        ),
         GoRoute(
           path: HomeView.routeName,
           builder: (context, state) => HomeView(),
         ),
 
         GoRoute(
-          path: PlaceDetailsView.routeName,
-          builder: (context, state) => PlaceDetailsView(),
-        ),
+            // path: CancelBookingView.routeName,
+            // pageBuilder: (context, state) =>
+            //     appTransiton(context, state, const CancelBookingView()),
+
+            path: PlaceDetailsView.routeName,
+            name: PlaceDetailsView.routeName,
+            pageBuilder: (context, state) {
+              final Place details = state.extra as Place;
+              return appTransiton(
+                  context, state, PlaceDetailsView(placeDescription: details));
+            }),
 
         GoRoute(
           path: BookHotelView.routeName,

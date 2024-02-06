@@ -1,3 +1,3 @@
-class EditProfileModel {
+class SettingModel {
   // TODO: add your model here
 }

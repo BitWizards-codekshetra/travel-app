@@ -2,36 +2,51 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hackathon_proj/app/core/theme/app_theme.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hackathon_proj/app/core/theme/base_assets.dart';
+import 'package:hackathon_proj/app/modules/book_hotel/providers/book_hotel_providers.dart';
 
 class HotelDetailView extends ConsumerWidget {
   HotelDetailView({Key? key}) : super(key: key);
   static const routeName = '/hotelDetail';
 
-  List<String> imagesList = [
-    'https://i.pinimg.com/originals/d3/45/11/d3451114ab4e1d55ead624930bcff60c.jpg',
-    'https://t4.ftcdn.net/jpg/03/04/37/91/240_F_304379136_TaU4VZ0dnwBd8ImND3bGAwCEdcZ2PcZj.jpg',
-    'https://t3.ftcdn.net/jpg/02/16/19/56/240_F_216195684_CgOPhTnGiqTBZW1OT1WxaVFc6oEWBA7E.jpg',
-    'https://t4.ftcdn.net/jpg/02/25/98/29/240_F_225982943_eZYwYAoACnfhZnoi1rv54JCv2lZd3EtX.jpg',
-    'https://t4.ftcdn.net/jpg/03/23/89/13/240_F_323891347_Y0RF7AExyCjyFtZWZYhmhkIdYDUmRmNq.jpg',
-    'https://t3.ftcdn.net/jpg/00/23/37/30/240_F_23373041_p1a7TfakMOYC9GF7odPyAakKaW9ww7hc.jpg',
-    'https://t4.ftcdn.net/jpg/00/74/05/89/240_F_74058991_bpE2mONOZG6esm2wbsXAs87PV6bstgnK.jpg',
+  List<String> hotelList = [
+    'https://www.wyndhamhotels.com/content/dam/creative-images/apac/text/3x2/Peninsula%20Excelsior%20Singapore,%20a%20Wyndham%20Hotel.jpg',
+    'https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65045f093c166fdddb4a94a5_x-65045f0266217.webp',
+    'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/00/50/fd/hotel-colline-de-france.jpg?w=500&h=400&s=1',
+    'https://www.tajhotels.com/content/dam/luxury/hotels/Taj_Lands_End_Mumbai/images/4x3/R&S_WOGLI_Exterior-Master.jpg'
   ];
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appTheme = ref.watch(appThemeProvider);
+    final noOfRooms = ref.watch(numberOfRooms);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: MediaQuery.of(context).size.height * 0.1,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
+          leading: InkWell(
+            onTap: () {
+              context.pop();
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+          ),
+          title: Image.asset(
+            BaseAssets.logo,
+            width: MediaQuery.of(context).size.width * 0.5,
+          ),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(4.0),
+            child: Container(
+              color: Colors.black,
+              height: 1.0,
             ),
           ),
         ),
-        backgroundColor: appTheme.lightTheme.primaryColor,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,47 +54,39 @@ class HotelDetailView extends ConsumerWidget {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).size.height * 0.01,
-                    horizontal: MediaQuery.of(context).size.width * 0.05),
+                  vertical: MediaQuery.of(context).size.height * 0.01,
+                  horizontal: MediaQuery.of(context).size.width * 0.05,
+                ),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.25,
+                  height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width * 1,
                   decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.fill, image: NetworkImage(hotelList[0])),
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
-                      ),
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(imagesList[0]),
-                      ),
-                      color: Colors.grey),
+                      )),
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.15,
+                height: MediaQuery.of(context).size.width * 0.30,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: imagesList.length,
+                  itemCount: hotelList.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.025,
-                        left: MediaQuery.of(context).size.width * 0.025,
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.01,
                       ),
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      width: MediaQuery.of(context).size.height * 0.15,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: NetworkImage(imagesList[index]),
-                          )),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Color(0xFF2F2F2F)),
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(hotelList[index])),
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                      ),
                     );
                   },
                 ),
@@ -89,7 +96,8 @@ class HotelDetailView extends ConsumerWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.05),
+                  horizontal: MediaQuery.of(context).size.width * 0.05,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -97,61 +105,18 @@ class HotelDetailView extends ConsumerWidget {
                     Row(
                       children: [
                         Text(
-                          "Location : ",
-                          style: TextStyle(
-                              color: Color(0xFF436850),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
+                          "Wifi Avaliability : ",
+                          style: GoogleFonts.jetBrainsMono(
+                              fontWeight: FontWeight.w500, fontSize: 16),
                         ),
-                        Text(
-                          "Hotel Location,City, State.....",
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Color(0xFF2f2f2f),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Wifi Availibility : ",
-                          style: TextStyle(
-                              color: Color(0xFF436850),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
-                        ),
+                        Spacer(),
                         Text(
                           "Yes",
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Color(0xFF2f2f2f),
-                              fontWeight: FontWeight.w400,
+                          style: GoogleFonts.jetBrainsMono(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
                               fontSize: 16),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Parking: ",
-                          style: TextStyle(
-                              color: Color(0xFF436850),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          "Yes",
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Color(0xFF2f2f2f),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16),
-                        ),
+                        )
                       ],
                     ),
                     SizedBox(
@@ -160,50 +125,84 @@ class HotelDetailView extends ConsumerWidget {
                     Row(
                       children: [
                         Text(
-                          "Number of rooms",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: Color(0xFF2f2f2f)),
+                          "Price : ",
+                          style: GoogleFonts.jetBrainsMono(
+                              fontWeight: FontWeight.w500, fontSize: 16),
                         ),
                         Spacer(),
-                        PhysicalModel(
-                          shape: BoxShape.circle,
-                          color: Colors.blueGrey,
-                          elevation: 4,
-                          child: CircleAvatar(
-                            radius: MediaQuery.of(context).size.width * 0.04,
-                            backgroundColor: Colors.red[300],
-                            child: Icon(
-                              Icons.remove,
+                        Text(
+                          "₹4999",
+                          style: GoogleFonts.jetBrainsMono(
                               color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Number of Rooms",
+                          style: GoogleFonts.jetBrainsMono(
+                              fontWeight: FontWeight.w500, fontSize: 16),
+                        ),
+                        Spacer(),
+                        InkWell(
+                          onTap: () {
+                            if (noOfRooms > 1) {
+                              ref.read(numberOfRooms.notifier).state =
+                                  ref.read(numberOfRooms) - 1;
+                            }
+                          },
+                          child: PhysicalModel(
+                            elevation: 3,
+                            color: Colors.blueGrey,
+                            shape: BoxShape.circle,
+                            child: CircleAvatar(
+                              backgroundColor: Color(0xFFFCBF49),
+                              radius: MediaQuery.of(context).size.width * 0.035,
+                              child: Icon(
+                                Icons.remove,
+                                color: Color(0xFF2F2F2F),
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.01,
+                          width: MediaQuery.of(context).size.width * 0.03,
                         ),
                         Text(
-                          "1",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 17),
+                          "$noOfRooms",
+                          style: GoogleFonts.jetBrainsMono(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.01,
+                          width: MediaQuery.of(context).size.width * 0.03,
                         ),
-                        PhysicalModel(
-                          shape: BoxShape.circle,
-                          color: Colors.blueGrey,
-                          elevation: 4,
-                          child: CircleAvatar(
-                            radius: MediaQuery.of(context).size.width * 0.04,
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.black,
+                        InkWell(
+                          onTap: () {
+                            ref.read(numberOfRooms.notifier).state =
+                                ref.read(numberOfRooms) + 1;
+                          },
+                          child: PhysicalModel(
+                            elevation: 3,
+                            color: Colors.blueGrey,
+                            shape: BoxShape.circle,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: MediaQuery.of(context).size.width * 0.035,
+                              child: Icon(
+                                Icons.add,
+                                color: Color(0xFF2F2F2F),
+                              ),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -211,98 +210,149 @@ class HotelDetailView extends ConsumerWidget {
                     ),
                     Text(
                       "Booking Dates",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF2f2f2f)),
+                      style: GoogleFonts.jetBrainsMono(
+                          fontWeight: FontWeight.w500, fontSize: 16),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
-                    Text(
-                      "From",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF2f2f2f)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.height * 0.01),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal:
-                                MediaQuery.of(context).size.width * 0.05,
-                            vertical:
-                                MediaQuery.of(context).size.height * 0.01),
-                        height: MediaQuery.of(context).size.height * 0.08,
-                        width: MediaQuery.of(context).size.width * 1,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(color: Colors.blueGrey, blurRadius: 3)
-                          ],
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(60),
-                          ),
-                        ),
-                        child: Row(
+                    Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
-                              style: TextStyle(
-                                  color: Color(0xFF2f2f2f),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500),
+                              "From",
+                              style: GoogleFonts.jetBrainsMono(
+                                  fontWeight: FontWeight.w500, fontSize: 16),
                             ),
-                            Spacer(),
-                            Icon(Icons.calendar_month)
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.01,
+                            ),
+                            Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.02,
+                                ),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.07,
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.blueGrey, blurRadius: 4),
+                                  ],
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
+                                      style: GoogleFonts.jetBrainsMono(
+                                          color: Color(0xFF2F2F2F),
+                                          fontSize: 16),
+                                    ),
+                                    Spacer(),
+                                    Icon(
+                                      Icons.calendar_month,
+                                      color: Colors.black,
+                                    )
+                                  ],
+                                ))
                           ],
+                        ),
+                        Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "To",
+                              style: GoogleFonts.jetBrainsMono(
+                                  fontWeight: FontWeight.w500, fontSize: 16),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.01,
+                            ),
+                            Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.02,
+                                ),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.07,
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.blueGrey, blurRadius: 4),
+                                  ],
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
+                                      style: GoogleFonts.jetBrainsMono(
+                                          color: Color(0xFF2F2F2F),
+                                          fontSize: 16),
+                                    ),
+                                    Spacer(),
+                                    Icon(
+                                      Icons.calendar_month,
+                                      color: Colors.black,
+                                    )
+                                  ],
+                                )),
+                          ],
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.03,
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: MediaQuery.of(context).size.height * 0.01,
+                          horizontal: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 1,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                            color: Color(0xFFFCBF49)),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              Text(
+                                "Book Hotel",
+                                style: GoogleFonts.jetBrainsMono(
+                                    color: Color(0xFF2f2f2f)),
+                              ),
+                              Spacer(),
+                              Icon(Icons.arrow_forward,
+                                  color: Color(0xFF2f2f2f))
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                    Text(
-                      "To",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF2f2f2f)),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.03,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.height * 0.01),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal:
-                                MediaQuery.of(context).size.width * 0.05,
-                            vertical:
-                                MediaQuery.of(context).size.height * 0.01),
-                        height: MediaQuery.of(context).size.height * 0.08,
-                        width: MediaQuery.of(context).size.width * 1,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(color: Colors.blueGrey, blurRadius: 3)
-                          ],
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(60),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
-                              style: TextStyle(
-                                  color: Color(0xFF2f2f2f),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Spacer(),
-                            Icon(Icons.calendar_month)
-                          ],
-                        ),
-                      ),
-                    )
                   ],
                 ),
               )

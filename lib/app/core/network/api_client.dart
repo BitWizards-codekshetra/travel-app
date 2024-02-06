@@ -1,7 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
-import 'package:hackathon_proj/app/core/local_storage/app_storage.dart';
 import 'package:hackathon_proj/app/core/network/endpoints.dart';
 import 'package:hackathon_proj/app/core/network/logger.dart';
 import 'package:hackathon_proj/app/core/network/retry_interceptor.dart';
@@ -27,14 +26,6 @@ class ApiInterceptors extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    if (options.path.isNotEmpty) {
-      final refreshToken = await AppStorage().getToken();
-      options.headers['Authorization'] = 'Bearer $refreshToken';
-    } else if (true) {
-      //only add token to protected api
-      final token = await AppStorage().getToken();
-      options.headers['Authorization'] = 'Bearer $token';
-    }
     super.onRequest(options, handler);
   }
 

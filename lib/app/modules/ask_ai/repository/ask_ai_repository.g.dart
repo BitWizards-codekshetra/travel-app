@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ask_ai_repository_impl.dart';
+part of 'ask_ai_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
